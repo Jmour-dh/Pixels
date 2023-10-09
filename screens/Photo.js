@@ -1,15 +1,16 @@
 import { StyleSheet, Text, View, Button } from "react-native";
-import React from "react";
+import {useEffect} from "react"
 
-const Photo = ({navigation}) => {
+const Photo = ({ navigation }) => {
+  useEffect(() => {
+    return () => {
+      console.log('Photo démonté');
+    }
+  }, []);
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Photo</Text>
-      <Button
-        onPress={() => navigation.goBack()}
-        title="Vers Portfolio"
-      />
-      <Button onPress={() => navigation.goBack("Home")} title="Vers Home" />
+      <Button onPress={() => navigation.popToTop()} title="Vers Portfolio" />
     </View>
   );
 };

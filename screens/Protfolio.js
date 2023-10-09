@@ -1,10 +1,16 @@
 import { Button, StyleSheet, Text, View } from "react-native";
+import {useEffect} from "react"
 
 const Protfolio = ({ navigation }) => {
+  useEffect(() => {
+    return () => {
+      console.log('Portfolio démonté');
+    }
+  }, []);
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Protfolio</Text>
-      <Button onPress={() => navigation.navigate("Photo")} title="Vers Photo" />
+      <Text style={styles.text}>Portfolio</Text>
+      <Button onPress={() => navigation.replace("Photo")} title="Vers Photo" />
     </View>
   );
 };
