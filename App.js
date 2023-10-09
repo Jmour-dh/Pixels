@@ -1,5 +1,5 @@
 import Home from "./screens/Home";
-import Portfolio from "./screens/Protfolio"
+import Portfolio from "./screens/Portfolio"
 import Photo from "./screens/Photo"
 
 import * as SplashScreen from "expo-splash-screen";
