@@ -1,24 +1,27 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Button } from "react-native";
+import React from "react";
 
-const Photo = () => {
+const Photo = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Photo</Text>
+      <Button
+        onPress={() => navigation.goBack()}
+        title="Vers Portfolio"
+      />
+      <Button onPress={() => navigation.goBack("Home")} title="Vers Home" />
     </View>
-  )
-}
+  );
+};
 
-export default Photo
+export default Photo;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:"lightblue",
-    flex:1,
+    backgroundColor: "orange",
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-  text: {
-    
-  }
-})
+  text: {},
+});

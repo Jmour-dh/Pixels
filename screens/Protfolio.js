@@ -1,24 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Button, StyleSheet, Text, View } from "react-native";
 
-
-const Protfolio = () => {
+const Protfolio = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Protfolio</Text>
+      <Button onPress={() => navigation.navigate("Photo")} title="Vers Photo" />
     </View>
-  )
-}
+  );
+};
 
-export default Protfolio
+export default Protfolio;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:"lightblue",
-    flex:1,
+    backgroundColor: "lightgreen",
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-  text: {
-    
-  }
-})
+  text: {},
+});

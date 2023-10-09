@@ -1,9 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 
-const Home = () => {
+const Home = ({navigation}) => {
+  const handlePress = () => {
+    navigation.navigate("Portfolio");
+    
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Home</Text>
+      <Button onPress={handlePress} title="Vers Portfolio" />
     </View>
   );
 };
@@ -18,7 +23,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    fontFamily: "InriaSans_300Bold_Italic",
+    fontFamily: "InriaSans-BoldItalic",
     fontSize: 25,
   },
 });
