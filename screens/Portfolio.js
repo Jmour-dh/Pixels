@@ -1,15 +1,23 @@
-import {  Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { globalStyles } from "../styles/AppStyles";
-// import { useRoute } from "@react-navigation/native";
+import Colors from "../styles/Colors";
+import { useLayoutEffect } from "react";
 
 const Portfolio = ({ navigation, route }) => {
-
-  // const route = useRoute()
- 
   const name = route.params.name;
   const country = route.params.country;
   const totalImg = route.params.totalImg;
 
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: `Portfolio de ${name}`,
+      headerTitle:{},
+      headerStyle: {
+        backgroundColor: "olive",
+      },
+      headerTintColor: Colors.white,
+    });
+  }, [navigation]);
 
   return (
     <View style={globalStyles.container}>
@@ -21,5 +29,3 @@ const Portfolio = ({ navigation, route }) => {
 };
 
 export default Portfolio;
-
-

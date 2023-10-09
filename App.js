@@ -1,11 +1,12 @@
 import Home from "./screens/Home";
-import Portfolio from "./screens/Portfolio"
-import Photo from "./screens/Photo"
+import Portfolio from "./screens/Portfolio";
+import Photo from "./screens/Photo";
 
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Colors from "./styles/Colors";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,10 +27,33 @@ export default function App() {
   }
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Portfolio" component={Portfolio} />
-        <Stack.Screen name="Photo" component={Photo} />
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "olive",
+          },
+          headerTintColor: Colors.white,
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            title: "Accueil",
+          }}
+        />
+        <Stack.Screen
+          name="Portfolio"
+          component={Portfolio}
+          options={{
+            title: "Portfolio",
+          }}
+        />
+        <Stack.Screen
+          name="Photo"
+          component={Photo}
+          options={{ title: "Photo" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
