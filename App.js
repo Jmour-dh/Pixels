@@ -6,9 +6,30 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+
 import Colors from "./styles/Colors";
+import Faq from "./screens/Faq";
+
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  return(
+    <Drawer.Navigator
+    screenOptions={{
+          headerStyle: {
+            backgroundColor: Colors.lightBrown
+          },
+          headerTintColor: Colors.white,
+        }}
+    >
+      <Drawer.Screen  name="Home" component={Home}/>
+      <Drawer.Screen  name="Faq" component={Faq}/>
+    </Drawer.Navigator>
+  )
+}
 
 export default function App() {
   let [fontLoaded] = useFonts({
@@ -36,17 +57,22 @@ export default function App() {
         }}
       >
         <Stack.Screen
-          name="Home"
-          component={Home}
+          name="Drawer"
+          component={MyDrawer}
           options={{
-            title: "Accueil",
+           // title: "Accueil",
           }}
         />
         <Stack.Screen
           name="Portfolio"
           component={Portfolio}
-          options={{
-            title: "Portfolio",
+          options={({ route }) => {
+            return {
+              title: `Portfolio de ${route.params.name.toUpperCase()}`,
+              headerStyle: {
+                backgroundColor: route.params.favColor,
+              },
+            };
           }}
         />
         <Stack.Screen

@@ -1,4 +1,5 @@
 export default {
-  white :"#fff",
+  white: "#fff",
   clicked: "palevioletred",
-}
+  lightBrown: "salmon",
+};
