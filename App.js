@@ -16,6 +16,8 @@ import MaterialIconsHeader from "./components/MaterialIconsHeader";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Selected from "./screens/Selected";
+import { Platform } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -108,6 +110,23 @@ function MyStack() {
   );
 }
 
+function selectedStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Selected"
+        component={Selected}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Photo"
+        component={Photo}
+        options={{ title: "Photo" }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 export default function App() {
   let [fontLoaded] = useFonts({
     "InriaSans-Bold": require("./assets/fonts/InriaSans-Bold.ttf"),
@@ -124,41 +143,66 @@ export default function App() {
     SplashScreen.hideAsync();
   }
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: Colors.lightBrown,
-          },
-          headerTintColor: Colors.white,
-          tabBarActiveTintColor: Colors.lightBrown,
-          tabBarInactiveTintColor: Colors.darckGrey,
-          tabBarLabelPosition: "beside-icon",
-          tabBarShowLabel: false,
-          // tabBarActiveBackgroundColor:"red",
-        }}
-      >
-        <Tab.Screen
-          name="Membres"
-          component={MyStack}
-          options={{
-            headerShown: false,
-            tabBarLabel: "Accueil",
-            tabBarIcon: ({ size, color }) => (
-              <MaterialIcons name="home" size={size} color={color} />
-            ),
+    <>
+      <StatusBar style="light" />
+
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={{
+            headerTintColor: Colors.white,
+            // tabBarActiveTintColor: Colors.lightBrown,
+            // tabBarInactiveTintColor: Colors.darckGrey,
+            // tabBarLabelPosition: "beside-icon",
+            // tabBarShowLabel: false,
+            // tabBarActiveBackgroundColor:"red",
           }}
-        />
-        <Tab.Screen
-          name="Likes"
-          component={Selected}
-          options={{
-            tabBarIcon: ({ size, color }) => (
-              <MaterialIcons name="thumb-up" size={size} color={color} />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+        >
+          <Tab.Screen
+            name="Membres"
+            component={MyStack}
+            options={{
+              headerShown: false,
+              tabBarLabel: "Accueil",
+              tabBarIcon: ({ size, color }) => (
+                <MaterialIcons name="home" size={size} color={color} />
+              ),
+              tabBarStyle: {
+                backgroundColor:
+                  Platform.OS === "android" ? Colors.lightBrown : Colors.white,
+              },
+              tabBarActiveTintColor:
+                Platform.OS === "android" ? Colors.white : Colors.lightBrown,
+              tabBarInActiveTintColor:
+                Platform.OS === "android" ? Colors.white : Colors.darckGrey,
+            }}
+          />
+          <Tab.Screen
+            name="Likes"
+            component={selectedStack}
+            options={{
+              title: "FAVORIS",
+              tabBarLabel: "Selection",
+              tabBarIcon: ({ size, color }) => (
+                <MaterialIcons name="thumb-up" size={size} color={color} />
+              ),
+              tabBarStyle: {
+                backgroundColor:
+                  Platform.OS === "android" ? Colors.darckGrey : Colors.white,
+              },
+              tabBarActiveTintColor:
+                Platform.OS === "android" ? Colors.white : Colors.lightBrown,
+              tabBarInActiveTintColor:
+                Platform.OS === "android" ? Colors.white : Colors.darckGrey,
+              headerStyle: {
+                backgroundColor:
+                  Platform.OS === "android"
+                    ? Colors.darckGrey
+                    : Colors.lightBrown,
+              },
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
