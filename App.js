@@ -11,24 +11,101 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Colors from "./styles/Colors";
 import Faq from "./screens/Faq";
 
+import { MaterialIcons } from "@expo/vector-icons";
+import MaterialIconsHeader from "./components/MaterialIconsHeader";
+
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Selected from "./screens/Selected";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
 
 function MyDrawer() {
-  return(
+  return (
     <Drawer.Navigator
-    screenOptions={{
-          headerStyle: {
-            backgroundColor: Colors.lightBrown
-          },
-          headerTintColor: Colors.white,
-        }}
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: Colors.lightBrown,
+        },
+        headerTintColor: Colors.white,
+        //drawerActiveTintColor:"#333"
+        //drawerActiveBackgroundColor:Colors.lightBrown
+        // drawerInactiveTintColor:'red',
+        // drawerInactiveBackgroundColor:"yellow"
+        // drawerStyle: {
+        //   backgroundColor: "#c6cbef",
+        //   width: 240,
+        // },
+        headerTintColor: Colors.white,
+      }}
     >
-      <Drawer.Screen  name="Home" component={Home}/>
-      <Drawer.Screen  name="Faq" component={Faq}/>
+      <Drawer.Screen
+        name="Home"
+        component={Home}
+        options={{
+          title: "Accueil",
+          //  drawerLabel:'Tous les membres'
+          drawerIcon: ({ color }) => (
+            <MaterialIcons
+              name="supervised-user-circle"
+              size={24}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Faq"
+        component={Faq}
+        options={{
+          title: "FAQ",
+          drawerIcon: ({ color }) => (
+            <MaterialIconsHeader iconName="question-answer" iconColor={color} />
+          ),
+        }}
+      />
     </Drawer.Navigator>
-  )
+  );
+}
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "olive",
+        },
+        headerTintColor: Colors.white,
+      }}
+    >
+      <Stack.Screen
+        name="Drawer"
+        component={MyDrawer}
+        options={{
+          // title: "Accueil",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Portfolio"
+        component={Portfolio}
+        options={({ route }) => {
+          return {
+            title: `Portfolio de ${route.params.name.toUpperCase()}`,
+            headerStyle: {
+              backgroundColor: route.params.favColor,
+            },
+          };
+        }}
+      />
+      <Stack.Screen
+        name="Photo"
+        component={Photo}
+        options={{ title: "Photo" }}
+      />
+    </Stack.Navigator>
+  );
 }
 
 export default function App() {
@@ -48,39 +125,40 @@ export default function App() {
   }
   return (
     <NavigationContainer>
-      <Stack.Navigator
+      <Tab.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: "olive",
+            backgroundColor: Colors.lightBrown,
           },
           headerTintColor: Colors.white,
+          tabBarActiveTintColor: Colors.lightBrown,
+          tabBarInactiveTintColor: Colors.darckGrey,
+          tabBarLabelPosition: "beside-icon",
+          tabBarShowLabel: false,
+          // tabBarActiveBackgroundColor:"red",
         }}
       >
-        <Stack.Screen
-          name="Drawer"
-          component={MyDrawer}
+        <Tab.Screen
+          name="Membres"
+          component={MyStack}
           options={{
-           // title: "Accueil",
+            headerShown: false,
+            tabBarLabel: "Accueil",
+            tabBarIcon: ({ size, color }) => (
+              <MaterialIcons name="home" size={size} color={color} />
+            ),
           }}
         />
-        <Stack.Screen
-          name="Portfolio"
-          component={Portfolio}
-          options={({ route }) => {
-            return {
-              title: `Portfolio de ${route.params.name.toUpperCase()}`,
-              headerStyle: {
-                backgroundColor: route.params.favColor,
-              },
-            };
+        <Tab.Screen
+          name="Likes"
+          component={Selected}
+          options={{
+            tabBarIcon: ({ size, color }) => (
+              <MaterialIcons name="thumb-up" size={size} color={color} />
+            ),
           }}
         />
-        <Stack.Screen
-          name="Photo"
-          component={Photo}
-          options={{ title: "Photo" }}
-        />
-      </Stack.Navigator>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }

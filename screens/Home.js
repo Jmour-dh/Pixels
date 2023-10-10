@@ -1,4 +1,4 @@
-import { FlatList, View } from "react-native";
+import { Button, FlatList, View } from "react-native";
 import { globalStyles } from "../styles/AppStyles";
 import Colors from "../styles/Colors";
 import PressableItems from "../components/PressableItems";
@@ -45,10 +45,10 @@ const Home = ({ navigation }) => {
 
   const renderProfiles = ({ item }) => {
     return (
-    <PressableItems 
-    item={item} 
-    //handleNavigate={() => navigation.navigate("Portfolio", item)}
-    />
+      <PressableItems
+        item={item}
+        //handleNavigate={() => navigation.navigate("Portfolio", item)}
+      />
     );
   };
 
