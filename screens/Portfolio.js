@@ -1,14 +1,15 @@
-import { Text, View, Button, Platform } from "react-native";
+import { View, Image, ScrollView, Text } from "react-native";
 import { globalStyles } from "../styles/AppStyles";
-import Colors from "../styles/Colors";
 import { useLayoutEffect } from "react";
 import MaterialIconsHeader from "../components/MaterialIconsHeader";
+import TouchableImage from "../components/TouchableImage";
 
 const Portfolio = ({ navigation, route }) => {
   const name = route.params.name;
-  const country = route.params.country;
-  const totalImg = route.params.totalImg;
+  const profileImg = route.params.img;
   const favColor = route.params.favColor;
+  const desc = route.params.desc;
+  const photoArray = route.params.photos;
 
   const handlePress = () => {
     //HTTP request
@@ -33,16 +34,34 @@ const Portfolio = ({ navigation, route }) => {
     });
   }, [navigation]);
 
-  return (
-    <View style={globalStyles.container}>
-      {/* <Text style={globalStyles.text}> OS:{Platform.OS}</Text>
-      <Text style={globalStyles.text}>Version:{Platform.Version}</Text> */}
+  const selectPhoto = (photo) => {
+    navigation.navigate('Photo', photo)
+   }
 
-      <Text style={globalStyles.text}>{name}</Text>
-      <Text style={globalStyles.text}>{country}</Text>
-      <Text style={globalStyles.text}>{totalImg}</Text>
-      <Text style={globalStyles.text}>{favColor}</Text>
-    </View>
+  return (
+    <ScrollView style={globalStyles.container}>
+      <View style={{ backgroundColor: favColor, ...globalStyles.profileInfos }}>
+        <Image
+          style={globalStyles.smallProfileImg}
+          source={{ uri: profileImg }}
+        />
+        <Text style={globalStyles.profileName}> {name} </Text>
+      </View>
+      <View style={globalStyles.profileDescription}>
+        <Text style={globalStyles.titleBioText}>Bio:</Text>
+        <Text style={globalStyles.titleBio}>{desc}</Text>
+      </View>
+      <View>
+        {photoArray.map((photo) => (
+          <TouchableImage
+            key={photo.id}
+            imgUrl={photo.url}
+            imgTitle={photo.title}
+            onSelectPhoto={() => selectPhoto(photo)}
+          />
+        ))}
+      </View>
+    </ScrollView>
   );
 };
 

@@ -151,7 +151,7 @@ export default function App() {
           screenOptions={{
             headerTintColor: Colors.white,
             // tabBarActiveTintColor: Colors.lightBrown,
-            // tabBarInactiveTintColor: Colors.darckGrey,
+            // tabBarInactiveTintColor: Colors.darkGrey,
             // tabBarLabelPosition: "beside-icon",
             // tabBarShowLabel: false,
             // tabBarActiveBackgroundColor:"red",
@@ -173,7 +173,7 @@ export default function App() {
               tabBarActiveTintColor:
                 Platform.OS === "android" ? Colors.white : Colors.lightBrown,
               tabBarInActiveTintColor:
-                Platform.OS === "android" ? Colors.white : Colors.darckGrey,
+                Platform.OS === "android" ? Colors.white : Colors.darkGrey,
             }}
           />
           <Tab.Screen
@@ -187,16 +187,16 @@ export default function App() {
               ),
               tabBarStyle: {
                 backgroundColor:
-                  Platform.OS === "android" ? Colors.darckGrey : Colors.white,
+                  Platform.OS === "android" ? Colors.darkGrey : Colors.white,
               },
               tabBarActiveTintColor:
                 Platform.OS === "android" ? Colors.white : Colors.lightBrown,
               tabBarInActiveTintColor:
-                Platform.OS === "android" ? Colors.white : Colors.darckGrey,
+                Platform.OS === "android" ? Colors.white : Colors.darkGrey,
               headerStyle: {
                 backgroundColor:
                   Platform.OS === "android"
-                    ? Colors.darckGrey
+                    ? Colors.darkGrey
                     : Colors.lightBrown,
               },
             }}

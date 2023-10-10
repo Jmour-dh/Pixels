@@ -3,11 +3,11 @@ import { globalStyles } from "../styles/AppStyles";
 import Colors from "../styles/Colors";
 import { useNavigation } from "@react-navigation/native";
 
-const PressableItems = ({ item, handleNavigation }) => {
+const PressableItems = ({ item }) => {
   const navigation = useNavigation();
   return (
     <Pressable
-      onPress={() => navigation.navigate("Portfolio",item)}
+      onPress={() => navigation.navigate("Portfolio", item)}
       // onPress={handleNavigation}
       style={({ pressed }) => [
         {
@@ -20,7 +20,7 @@ const PressableItems = ({ item, handleNavigation }) => {
       <Image source={{ uri: item.img }} style={globalStyles.profileImg} />
       <View style={globalStyles.infoContainer}>
         <Text style={globalStyles.info}> {item.country} </Text>
-        <Text style={globalStyles.info}> {item.totalImg} </Text>
+        <Text style={globalStyles.info}> {item.photos.length} </Text>
       </View>
     </Pressable>
   );
